@@ -46,7 +46,6 @@ a, a:hover, a:active, a:visited {
   justify-content: center;
   color: white;
   font-size: 35px;
-  padding: 3rem;
-  padding-top: 0;
+  padding: 0 3rem;
   font-weight: 550;
 }
