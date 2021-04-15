@@ -13,16 +13,16 @@ export default function Home() {
 
       <ContentContainer>
        <div className='left'>
-          <h1 className={styles.header}>Sign-In</h1>
-          <input type='text' name='username' placeholder='Email' className={styles.input}/>
+            <h1 className={styles.header}>Register</h1>
+          <input type='text' name='name' placeholder='Name' className={styles.input}/>
+          <input type='text' name='email' placeholder='Email' className={styles.input}/>
           <input type='password' name='password' placeholder='Password' className={styles.input}/>
-          <input type='button' value='Log In' className={styles.button}/>
+          <input type='button' value='Register' className={styles.button}/>
         </div>
 
         <div className='right'>
           Face Detect
-          <p className={styles.info}>Please sign in to continue.  If you 
-          don't have a username please <Link href="/register"><a>register to continue</a></Link>.</p>
+          <p className={styles.info}>Already registered? You can <Link href="/"><a>sign-in</a></Link> here.</p>
         </div>
       </ContentContainer>
       
