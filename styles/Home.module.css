@@ -2,8 +2,15 @@
   font-size: 18px;
   color: rgba(255, 91, 0, 1);
   font-weight: 800;
+  margin-top: auto;
 }
 
+.logout {
+  color: rgba(0,172,193,1);
+  margin: 0.5em;
+  font-size: 0.7em;
+  margin-top: auto;
+}
 .logo {
   width: 80px;
   height: 90px;

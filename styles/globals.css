@@ -8,6 +8,10 @@ html,body {
 a, a:hover, a:active, a:visited {
   color: white;
 }
+.blue, .blue:hover, .blue:active, .blue:visited {
+  color: rgba(0,172,193,1);
+  cursor: pointer;
+}
 .main {
   display: flex;
   justify-content: center;
@@ -48,4 +52,7 @@ a, a:hover, a:active, a:visited {
   font-size: 35px;
   padding: 0 3rem;
   font-weight: 550;
+}
+.autoBottom {
+  margin-bottom: auto;
 }
