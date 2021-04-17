@@ -2,41 +2,56 @@ import { useUser } from '@auth0/nextjs-auth0'
 import Head from 'next/head'
 import Link from 'next/link'
 import ContentContainer from '../containers/contentContainer'
+import FaceRecognitionDisplay from '../components/recognitionDisplay'
 import styles from '../styles/Home.module.css'
-import { useState, useEffect, useRef } from 'react'
+import { useState} from 'react'
 import { app } from '../utils/clarifai'
-import parseClarifaiData from '../utils/parseClarifaiData'
+import { parseClarifaiData} from '../utils/helpers'
 
 export default function Home() {
   //states
   const [input, setInput] = useState('')
   const [boundingBoxes, setBoundingBoxes] = useState([])
   const [imgUrl, setImgUrl] = useState('')
-  const [boxDivs, setBoxDivs] = useState([])
 
-  //refs
-  const imageElement = useRef(null) //so we can populate a src once image is submitted
-  const infoElement = useRef(null) //so we can hide it after image is submitted
-
-
+  //Auth0 grabs
   const { user, error, isLoading } = useUser()
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>{error.message}</div>
+  
+  //there's probably a better way than doing a db update every time they hit submit
+  //but this is what I went with in the end
+  const updateCount = async () => {
+    try {
+      user.entries++
+      await fetch(`http://localhost:3000/api/users/${user.uniqueID}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({entries: user.entries})
+      })
 
-  //calculate boxes function
-  //useEffect for box generation detection
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
   
   const onSubmit = () => {
-    setImgUrl(input);
-
+    setImgUrl(input)
     app.models.predict(
       "a403429f2ddf4b49b307e318f00e528b", //face-detect model_id
       input //since setSTate is asynch, using input instead of imgUrl
     )
     .then(
-      response => setBoundingBoxes(parseClarifaiData(response)), 
+      response => {
+        setBoundingBoxes(parseClarifaiData(response))
+      }, 
       err => console.log(new Error(err))
     )
+    updateCount()
   }
 
   return (
@@ -51,6 +66,7 @@ export default function Home() {
           {
             user &&
             <>
+            <p>Image Count: {user.entries}</p>
             <h1 className={styles.header}>Paste image link below</h1>
             <input type='text' onChange={e => setInput(e.target.value)} name='imageUrl' placeholder='http://your.image.link.here' className={styles.input}/>
             <input type='button' value='Detect!' onClick={onSubmit} className={styles.button}/>
@@ -72,8 +88,7 @@ export default function Home() {
           {
             user &&
             <>
-              Face Detect
-              <p className={styles.info}>Hello {user.given_name}, you have submitted {user.entries} image(s)</p>
+              <FaceRecognitionDisplay boxes={boundingBoxes} image={imgUrl}/>
             </>
           }
           {

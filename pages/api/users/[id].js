@@ -12,7 +12,6 @@ export default async (req, res) => {
         message: '',
         data: {},
     }
-
     switch (method) {
         case 'PUT':
             try {
