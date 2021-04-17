@@ -1,6 +1,8 @@
 ## What is this??
 This was my attempt at creating the final project for Zero-to-Mastery Web Developer course utilizing NextJS for an all-in-one solution for both front and back end.  All CRUD calls are run through NextJS's API routes to forgo the need for using Node/Express as a backend.  Auth0 was utilized for authentication in order to familiarize myself with 3rd party Auth providers, after building my own simple authorization system utilizing salted bcrypt hashing.  Lastly I made my own design and layout to hone in CSS competencies and make the project my own. Clarafi Deep Learning API was utilized for face detection.
 
+![screenshot](https://i.imgur.com/k96DlAy.png)
+
 ## Getting Started
 
 First, run the development server:
