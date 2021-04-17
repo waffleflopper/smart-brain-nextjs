@@ -39,6 +39,8 @@ export default function Home() {
     
   }
   
+  //todo: make sure the image changed before updating count
+  //make sure we get a valid response before updating count
   const onSubmit = () => {
     setImgUrl(input)
     app.models.predict(
@@ -58,7 +60,6 @@ export default function Home() {
     <>
       <Head>
         <title>Face Detection App</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <ContentContainer>

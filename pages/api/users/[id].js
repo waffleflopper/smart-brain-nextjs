@@ -4,7 +4,7 @@ import User from '../../../schemas/User'
 
 export default async (req, res) => {
     const {
-        query: { id },
+        query: { id }, //id is whatever comes after /api/users/... in our case it's a unique identifying string
         method
     } = req;
     let response = {
@@ -34,7 +34,7 @@ export default async (req, res) => {
             }
             break;
         default:
-            response.message = 'api is only for updating'
+            response.message = 'incorrect use of API'
             break;
     }
 

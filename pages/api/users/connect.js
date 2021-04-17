@@ -17,6 +17,7 @@ export default async (req, res) => {
             try {
                 const myUser = await User.findOne({ email: body.email })
                 if (!myUser) {
+                    //email is unique so no find means we create an entry for them
                     const newUser = await User.create(
                         {
                             email: req.body.email,
@@ -36,7 +37,7 @@ export default async (req, res) => {
             }
             break;
         default:
-            response.message = "can only post"
+            response.message = "incorrect use of API"
             break;
     }
 

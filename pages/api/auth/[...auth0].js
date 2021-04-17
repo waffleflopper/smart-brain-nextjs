@@ -1,5 +1,8 @@
 import { handleAuth, handleCallback } from '@auth0/nextjs-auth0'
 
+//when we get the user object back from Auth0 we want to associate it with
+//our db so we make an api call to users/connect, which gives us back the users info
+//or creates a new user if the email hasn't been logged in our db yet
 
 const afterCallback = async (req, res, session, state) => {
     //from here we can link up with the stored db stuff
@@ -22,7 +25,7 @@ const afterCallback = async (req, res, session, state) => {
         const content = await rawResponse.json();
         const { _id, entries } = await content.data;
 
-        session.user.uniqueID = _id;
+        session.user.uniqueID = _id;  //tag on the id so we can update the entries with the users/[id] api call
         session.user.entries = entries;
 
     })();
@@ -30,7 +33,7 @@ const afterCallback = async (req, res, session, state) => {
     return session;
 }
 
-export default handleAuth({
+export default handleAuth({ 
     async callback(req, res) {
         try {
             await handleCallback(req, res, { afterCallback });

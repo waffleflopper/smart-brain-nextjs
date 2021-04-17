@@ -6,6 +6,7 @@ const FaceRecognitionDisplay = ({boxes, image}) => {
 
     const imageElement = useRef(null)
 
+    //when we get new boxes this triggers a render so we get our array of divs
     useEffect(() => {
         setBoxDivs(calculateBoxes(boxes))
     }, [boxes])

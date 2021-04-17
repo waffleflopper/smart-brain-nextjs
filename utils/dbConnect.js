@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const connection = {};
-
+//hooking up to our db.  you need to make a .env.local with the MONGO_URI variable pointing to your db
 async function dbConnect() {
     if (connection.isConnected) return;
 
